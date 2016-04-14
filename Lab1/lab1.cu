@@ -15,7 +15,7 @@ __device__ void isPrime(int* d_values, int N){
 
 	if(thisValue == 2)}{
 		d_values[thisValue] = 1;
-		return true;
+		return;
 	}
 	if(thisValue % 2 == 0){
 		d_values[thisValue] = 0;
@@ -78,8 +78,6 @@ int main(int argc, char** argv){
 	free(h_array);
 
 	return 0;
-
-
 }
 
 void usage(int exitStatus, char* programName){
