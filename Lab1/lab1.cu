@@ -3,7 +3,7 @@
 // Gpu kernel code
 __global__ void doubleIndexValue(int* a, int n){
 	int threadId = blockIdx.x*blockDim.x + threadIdx.x;
-	a[theadId] = 2 * threadId;
+	a[threadId] = 2 * threadId;
 }
 
 
@@ -15,11 +15,11 @@ int main(){
 	int arraySize = n * sizeof(int);
 
 	// allocate the host array
-	int* h_array = malloc(arraySize);
+	int* h_array = (void*) malloc(arraySize);
 
 	// allocate the gpu array
 	int* d_array;
-	d_array = cudaMalloc(&d_array, arraySize);
+	cudaMalloc(&d_array, arraySize);
 
 	// copy host array to gpu (not neccessary in this test)
 	// ...
