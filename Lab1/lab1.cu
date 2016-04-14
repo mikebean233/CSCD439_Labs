@@ -74,7 +74,7 @@ int main(int argc, char** argv){
 	// Print our results
 	int i = 0;
 	for(; i < N; ++i){
-		printf("h_array[%lld] = %d\n", i, h_array[i]);
+		printf("h_array[%d] = %lld\n", i, h_array[i]);
 	}
 
 	// free the host memory
