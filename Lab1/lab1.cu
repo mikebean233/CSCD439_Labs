@@ -13,7 +13,7 @@ __device__ void isPrime(int* d_values, int N){
 		return;
 	}
 
-	if(thisValue == 2)}{
+	if(thisValue == 2){
 		d_values[thisValue] = 1;
 		return;
 	}
