@@ -26,7 +26,7 @@ __global__ void isPrime(long long int* d_array, int N){
     }
 
     int j = 3;
-    for(; j*j < N; j += 2){
+    for(; j < N; j ++j){
         if(thisValue % j== 0){
             d_array[thisValue] = 0;
             return;
