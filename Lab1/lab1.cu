@@ -2,7 +2,7 @@
 
 void usage(int exitStatus, char* programName);
 
-__global__ void isPrime(int* d_array, int N){
+__global__ void isPrime(long long int* d_array, int N){
         int thisValue = blockIdx.x * blockDim.x + threadIdx.x;
 
     if(thisValue == 0){
