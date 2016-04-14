@@ -15,7 +15,7 @@ int main(){
 	int arraySize = n * sizeof(int);
 
 	// allocate the host array
-	int* h_array = (void*) malloc(arraySize);
+	int* h_array = (int*) malloc(arraySize);
 
 	// allocate the gpu array
 	int* d_array;
