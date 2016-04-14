@@ -2,7 +2,7 @@
 
 void usage(int exitStatus, char* programName);
 
-__device__ void isPrime(int* d_array, int N){
+__global__ void isPrime(int* d_array, int N){
         int thisValue = blockIdx.x * blockDim.x + threadIdx.x;
 
     if(thisValue == 0){
@@ -15,7 +15,7 @@ __device__ void isPrime(int* d_array, int N){
             return;
         }
 
-    f(thisValue == 2){
+    if(thisValue == 2){
         d_array[thisValue] = 1;
         return;
     }
