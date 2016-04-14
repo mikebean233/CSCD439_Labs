@@ -3,25 +3,34 @@
 __device__ void isPrime(int* d_values, int N){
 	int thisValue = blockIdx.x * blockDim.x + threadIdx.x;
 
-	if(thisValue == 0)
-		return false;
+	if(thisValue == 0){
+		d_values[thisValue] = 0;
+		return;	
+	}
 
-	if(thisValue == 1)
-		return false;
+	if(thisValue == 1){
+		d_values[thisValue] = 0;
+		return;
+	}
 
-	if(thisValue == 2)
+	if(thisValue == 2)}{
+		d_values[thisValue] = 1;
 		return true;
-
-	if(thisValue % 2 == 0)
-		return false;
+	}
+	if(thisValue % 2 == 0){
+		d_values[thisValue] = 0;
+		return;
+	}
 
 	int j = 3;
 	for(; j*j < N; j += 2){
-		if(j % thisValue == 0)
-			return false;
+		if(j % thisValue == 0){
+			d_array[thisValue] = 0;
+			return;
+		}
 	}
 
-	return true;
+	d_array[thisValue] = 1;
 }
 
 int main(int argc, char** argv){
@@ -29,9 +38,9 @@ int main(int argc, char** argv){
 		usage(1, argv[0]);
 
 	int N = atoi(argv[1]);
-	int BlockSize |= atoi(argv[2]);
+	int blockSize |= atoi(argv[2]);
 
-	if(!(n | BlockSize))
+	if(!(n | blockSize))
 		usage(2, argv[0]);
 
 	int arraySizeInBytes = sizeof(long long int) * N;
@@ -73,7 +82,7 @@ int main(int argc, char** argv){
 
 }
 
-void usage(int exitStatus, char* progamName){
+void usage(int exitStatus, char* programName){
 	fprintf(stderr, "usage: %s N blockSize", programName);
 	exit(exitStatus);
 }
