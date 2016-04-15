@@ -72,8 +72,8 @@ int main(int argc, char** argv){
 	// run the sequential version
 	getSeqPrimes(seqArray, arraySizeInBytes);
 
-	int seqSum = sumArray(seqArray);
-	int parSum = sumArray(h_array);
+	int seqSum = sumArray(seqArray, N + 1);
+	int parSum = sumArray(h_array, N + 1);
 
 	printf("N: %lld\n", N);
 	printf("blockSize: %d\n", blockSize);
@@ -95,16 +95,7 @@ int main(int argc, char** argv){
 }
 
 void getSeqPrimes(int* array, long long int arraySize){
-	if(thisValue < 1)
-    	return;
-
-    if(thisValue == 2){
-        d_array[thisValue] = 1;
-        return;
-    }
-    if(arraySize < 3)
-    	return;
-
+	
     long long int thisValue;
     for(thisValue = 3; thisValue < arraySize; thisValue += 2){}
 
