@@ -48,7 +48,7 @@ int main(int argc, char** argv){
 
 	int* seqArray;
 	h_array  = (int*) malloc(arraySizeInBytes);
-	seqArray = (int*) calloc(sizeof(int), N + 1);
+//	seqArray = (int*) calloc(sizeof(int), N + 1);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
@@ -68,18 +68,18 @@ int main(int argc, char** argv){
 	cudaFree(d_array);
 
 	// run the sequential version
-	getSeqPrimes(seqArray, arraySizeInBytes);
+//	getSeqPrimes(seqArray, arraySizeInBytes);
 
-	int seqSum = sumArray(seqArray, N + 1);
+//	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
 
 	printf("N: %lld\n", N);
 	printf("blockSize: %d\n", blockSize);
 	printf("gridSize: %d\n", gridSize);
-	printf("sequential prime count: %d\n", seqSum);
+	//printf("sequential prime count: %d\n", seqSum);
 	printf("paralell prim count: %d\n", parSum);
     
-    free(seqArray);
+    //free(seqArray);
     free(h_array);
 
 	return 0;
