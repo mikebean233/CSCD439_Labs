@@ -70,8 +70,8 @@ int main(int argc, char** argv){
 	cudaFree(d_array);
 
 	// run the sequential version
-	getSeqPrimes(seqArray, arraySizeInBytes);
-
+//	getSeqPrimes(seqArray, arraySizeInBytes);
+/*
 	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv){
     
     //free(seqArray);
     //free(h_array);
-
+*/
 	return 0;
 }
 
