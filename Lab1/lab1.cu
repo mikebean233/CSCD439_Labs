@@ -12,11 +12,8 @@ __global__ void isPrime(int* d_array, long long int N){
     if(thisValue < 1)
     	return;
 
-  
-    
-  
     long long int j;
-    for(j = 2; j*j < thisValue; j++){
+    for(j = 2; j < sqrt(thisValue); j++){
         if(thisValue % j== 0){
             d_array[thisValue] = 0;
             return;
@@ -25,6 +22,9 @@ __global__ void isPrime(int* d_array, long long int N){
 
     d_array[thisValue] = 1;
 }
+
+
+__global__ 
 
 int main(int argc, char** argv){
 	if(argc != 3)
