@@ -81,8 +81,8 @@ int main(int argc, char** argv){
 	printf("sequential prime count: %d\n", seqSum);
 	printf("paralell prim count: %d\n", parSum);
     
-    free(seqArray);
-    free(h_array);
+    //free(seqArray);
+    //free(h_array);
 
 	return 0;
 }
