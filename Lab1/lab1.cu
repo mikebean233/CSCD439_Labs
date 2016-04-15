@@ -85,7 +85,7 @@ int main(int argc, char** argv){
 	// Print our results
 	int i = 0;
 	for(; i < N; ++i){
-		printf("seqArray[%d] = %d\n", i, seqAarray[i]);
+		printf("seqArray[%d] = %d\n", i, seqArray[i]);
 	}
 
 	// free the host memory
