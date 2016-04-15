@@ -49,7 +49,7 @@ int main(int argc, char** argv){
 	int* h_array;
 	int* d_array;
 	int* seqArray;
-	h_array = (int*) malloc(arraySizeInBytes);
+	h_array  = (int*) malloc(arraySizeInBytes);
 	seqArray = (int*) calloc(sizeof(int), N + 1);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 	// caculate the grid size
 	int gridSize = ceil((N + 1) / 2.0 / blockSize);
 
-	int currentTime();
+	//int currentTime();
 	// run the kernel
 	isPrime<<<gridSize, blockSize>>>(d_array, N);
 
