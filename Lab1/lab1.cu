@@ -71,14 +71,14 @@ int main(int argc, char** argv){
 
 	// run the sequential version
 //	getSeqPrimes(seqArray, arraySizeInBytes);
-/*
-	int seqSum = sumArray(seqArray, N + 1);
+
+//	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
 
 	printf("N: %lld\n", N);
 	printf("blockSize: %d\n", blockSize);
 	printf("gridSize: %d\n", gridSize);
-	printf("sequential prime count: %d\n", seqSum);
+//	printf("sequential prime count: %d\n", seqSum);
 	printf("paralell prim count: %d\n", parSum);
     
     //free(seqArray);
