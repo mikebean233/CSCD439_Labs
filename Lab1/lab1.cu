@@ -54,7 +54,7 @@ int main(int argc, char** argv){
 	cudaMemset(d_array, 0, arraySizeInBytes);
 
 	// caculate the grid size
-	int gridSize ceil((N + 1) / 2.0 / blockSize);
+	int gridSize = ceil((N + 1) / 2.0 / blockSize);
 
 
 	// run the kernel
