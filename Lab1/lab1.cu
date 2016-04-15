@@ -4,8 +4,8 @@ void usage(int exitStatus, char* programName);
 long long int sumArray(int* array);
 
 __global__ void isPrime(int* d_array, long long int N){
-    long long int theadId = blockIdx.x * blockDim.x + threadIdx.x;
-    long long ing thisValue = (threadId * 2) + 1;
+    long long int threadId = blockIdx.x * blockDim.x + threadIdx.x;
+    long long int thisValue = (threadId * 2) + 1;
 
     if(thisValue < 1)
     	return;
@@ -46,7 +46,7 @@ int main(int argc, char** argv){
 	// allocate our arrays
 	int* h_array;
 	int* d_array;
-	h_array = (long long int*) malloc(arraySizeInBytes);
+	h_array = (int*) malloc(arraySizeInBytes);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
