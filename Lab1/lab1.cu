@@ -11,19 +11,22 @@ __global__ void isPrime(int* d_array, long long int N){
 
     if(thisValue < 1)
     	return;
-
-    long long int j;
-    for(j = 2; j < sqrt(thisValue); j++){
-        if(thisValue % j== 0){
-            d_array[thisValue] = 0;
-            return;
-        }
-    }
-
-    d_array[thisValue] = 1;
+    if(thisValue < N){
+		d_array[thisValue] = isPrime2(thisValue);
+	{
 }
 
+__device__ int  isPrime2(long long int value){
 
+long long int limit = (long long int) sqrt((float) value ) + 1;
+long long int j;
+    for(j = 2; j < limit; j++){
+        if(thisValue % j== 0){
+            return 1;
+        }
+    }
+    return 0;
+}
 
 
 int main(int argc, char** argv){
