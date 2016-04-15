@@ -24,7 +24,7 @@ __global__ void isPrime(int* d_array, long long int N){
 }
 
 
-__global__ 
+
 
 int main(int argc, char** argv){
 	if(argc != 3)
