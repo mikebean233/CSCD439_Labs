@@ -50,7 +50,7 @@ int main(int argc, char** argv){
 	cudaMemset(d_array, 0, arraySizeInBytes);
 
 	// caculate the grid size
-	int gridSize = 100;//ceil((N + 1) / 2.0 / blockSize);
+	int gridSize = ceil((N + 1) / 2.0 / blockSize);
 
 	//int currentTime();
 	// run the kernel
@@ -90,12 +90,11 @@ void getSeqPrimes(int* array, long long int arraySize){
 	    }
 
 	    long long int j;
-	    for(j = 3; j*j < thisValue; j += 2){
+	    for(j = 2; j*j < thisValue; j++){
 	        if(thisValue % j == 0){
 	            array[thisValue] = 0;
 	        }
 	    }
-
 	    array[thisValue] = 1;
 	}
 }
