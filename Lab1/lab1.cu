@@ -83,10 +83,10 @@ int main(int argc, char** argv){
 
 
 	// Print our results
-	int i = 0;
-	for(; i < N; ++i){
-		printf("seqArray[%d] = %d\n", i, seqArray[i]);
-	}
+	//int i = 0;
+	//for(; i < N; ++i){
+	//	printf("seqArray[%d] = %d\n", i, seqArray[i]);
+//	}
 
 	// free the host memory
 	free(h_array);
@@ -97,12 +97,14 @@ int main(int argc, char** argv){
 void getSeqPrimes(int* array, long long int arraySize){
 	
     long long int thisValue;
-    for(thisValue = 3; thisValue < arraySize; thisValue += 2){
-
-	  
+    for(thisValue = 2; thisValue < arraySize; thisValue += 2){
+    	if(thisValue == 2){
+    		array[thisValue] = 1;
+	    	continue;
+	    }
 	    long long int j;
 	    for(j = 3; j*j < thisValue; j += 2){
-	        if(thisValue % j== 0){
+	        if(thisValue % j == 0){
 	            array[thisValue] = 0;
 	        }
 	    }
