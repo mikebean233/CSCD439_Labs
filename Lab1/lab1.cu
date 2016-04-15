@@ -73,7 +73,7 @@ int main(int argc, char** argv){
 //	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
 
-	printf("N: %lld\n", N);
+	printf("N: %d\n", N);
 	printf("blockSize: %d\n", blockSize);
 	printf("gridSize: %d\n", gridSize);
 	//printf("sequential prime count: %d\n", seqSum);
