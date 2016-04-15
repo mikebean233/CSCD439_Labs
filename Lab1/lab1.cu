@@ -89,7 +89,7 @@ int main(int argc, char** argv){
 //	}
 
 	// free the host memory
-	free(h_array);
+	//free(h_array);
 
 	return 0;
 }
