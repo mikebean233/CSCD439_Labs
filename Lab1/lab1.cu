@@ -2,13 +2,13 @@
 #include<math.h>
 
 void usage(int exitStatus, char* programName);
-long long int sumArray(int* array, long long int arraySize);
-void getSeqPrimes(int* array, long long int arraySize);
-__device__ int  isPrime2(long long int value);
+int sumArray(int* array, int arraySize);
+void getSeqPrimes(int* array, int arraySize);
+__device__ int  isPrime2(int value);
 
-__global__ void isPrime(int* d_array, long long int N){
-    long long int threadId = blockIdx.x * blockDim.x + threadIdx.x;
-    long long int thisValue = (threadId * 2) + 1;
+__global__ void isPrime(int* d_array, int N){
+    int threadId = blockIdx.x * blockDim.x + threadIdx.x;
+    int thisValue = (threadId * 2) + 1;
 
     if(threadId < 1)
     	return;
@@ -18,10 +18,10 @@ __global__ void isPrime(int* d_array, long long int N){
 	}
 }
 
-__device__ int isPrime2(long long int value){
+__device__ int isPrime2(int value){
 
-long long int limit = (long long int) sqrt( (float) value ) + 1;
-long long int j;
+int limit = (int) sqrt( (float) value ) + 1;
+int j;
     for(j = 2; j < limit; j++){
         if(value % j == 0){
             return 0;
@@ -34,7 +34,7 @@ int main(int argc, char** argv){
 	if(argc != 3)
 		usage(1, argv[0]);
 
-	long long int N = (long long int) atoi(argv[1]);
+	int N = (int) atoi(argv[1]);
 	int blockSize = atoi(argv[2]);
 
 	if(!(N | blockSize))
@@ -85,16 +85,16 @@ int main(int argc, char** argv){
 	return 0;
 }
 
-void getSeqPrimes(int* array, long long int arraySize){
+void getSeqPrimes(int* array, int arraySize){
 	
-    long long int thisValue;
+    int thisValue;
     for(thisValue = 2; thisValue < arraySize; thisValue += 2){
     	if(thisValue == 2){
     		array[thisValue] = 1;
 	    	continue;
 	    }
 
-	    long long int j;
+	    int j;
 	    for(j = 2; j*j < thisValue; j++){
 	        if(thisValue % j == 0){
 	            array[thisValue] = 0;
@@ -104,8 +104,8 @@ void getSeqPrimes(int* array, long long int arraySize){
 	}
 }
 
-long long int sumArray(int* array, long long int arraySize){
-	long long int sum = 0;
+int sumArray(int* array, int arraySize){
+	int sum = 0;
 	long long index = 0;
 	for(; index < arraySize; ++index){
 		sum += array[index];
@@ -117,7 +117,3 @@ void usage(int exitStatus, char* programName){
 	fprintf(stderr, "usage: %s N blockSize\n", programName);
 	exit(exitStatus);
 }
-
-
-
-
