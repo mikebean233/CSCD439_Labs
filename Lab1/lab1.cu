@@ -85,7 +85,7 @@ int main(int argc, char** argv){
 	// Print our results
 	int i = 0;
 	for(; i < N; ++i){
-		printf("h_array[%d] = %d\n", i, h_array[i]);
+		printf("seqArray[%d] = %d\n", i, seqAarray[i]);
 	}
 
 	// free the host memory
@@ -121,7 +121,7 @@ long long int sumArray(int* array, long long int arraySize){
 }
 
 void usage(int exitStatus, char* programName){
-	fprintf(stderr, "usage: %s N blockSize", programName);
+	fprintf(stderr, "usage: %s N blockSize\n", programName);
 	exit(exitStatus);
 }
 
