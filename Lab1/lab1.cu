@@ -3,7 +3,7 @@
 
 void usage(int exitStatus, char* programName);
 long long int sumArray(int* array, long long int arraySize);
-void* getSeqPrimes(int* array, long long int arraySize);
+void getSeqPrimes(int* array, long long int arraySize);
 
 __global__ void isPrime(int* d_array, long long int N){
     long long int threadId = blockIdx.x * blockDim.x + threadIdx.x;
@@ -43,14 +43,14 @@ int main(int argc, char** argv){
 	if(!(N | blockSize))
 		usage(2, argv[0]);
 
-	int arraySizeInBytes = sizeof(long long int) * (N + 1);
+	int arraySizeInBytes = sizeof(int) * (N + 1);
 
 	// allocate our arrays
 	int* h_array;
 	int* d_array;
 	int* seqArray;
 	h_array = (int*) malloc(arraySizeInBytes);
-	seqArray = (int*) calloc(arraySizeInBytes);
+	seqArray = (int*) calloc(sizeof(int), N + 1);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
