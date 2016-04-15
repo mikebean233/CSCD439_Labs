@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h>
 
 void usage(int exitStatus, char* programName);
 long long int sumArray(int* array);
@@ -53,7 +54,7 @@ int main(int argc, char** argv){
 	cudaMemset(d_array, 0, arraySizeInBytes);
 
 	// caculate the grid size
-	int gridSize ((N + 1) / 2.0 / blockSize);
+	int gridSize ceil((N + 1) / 2.0 / blockSize);
 
 
 	// run the kernel
