@@ -14,12 +14,12 @@ __global__ void isPrime(int* d_array, long long int N){
     	return;
     if(thisValue < N){
 		d_array[thisValue] = isPrime2(thisValue);
-	{
+	}
 }
 
-__device__ int  isPrime2(long long int value){
+__device__ int isPrime2(long long int value){
 
-long long int limit = (long long int) sqrt((float) value ) + 1;
+long long int limit = (long long int) sqrt( (float) value ) + 1;
 long long int j;
     for(j = 2; j < limit; j++){
         if(thisValue % j== 0){
