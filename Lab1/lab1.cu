@@ -12,18 +12,11 @@ __global__ void isPrime(int* d_array, long long int N){
     if(thisValue < 1)
     	return;
 
-    if(thisValue == 2){
-        d_array[thisValue] = 1;
-        return;
-    }
+  
     
-    if(thisValue % 2 == 0){
-        d_array[thisValue] = 0;
-        return;
-    }
-
+  
     long long int j;
-    for(j = 3; j*j < thisValue; j += 2){
+    for(j = 2; j*j < thisValue; j++){
         if(thisValue % j== 0){
             d_array[thisValue] = 0;
             return;
@@ -83,7 +76,7 @@ int main(int argc, char** argv){
     
     //free(seqArray);
     //free(h_array);
-*/
+
 	return 0;
 }
 
