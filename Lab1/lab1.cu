@@ -80,16 +80,9 @@ int main(int argc, char** argv){
 	printf("gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
 	printf("paralell prim count: %d\n", parSum);
-
-
-	// Print our results
-	//int i = 0;
-	//for(; i < N; ++i){
-	//	printf("seqArray[%d] = %d\n", i, seqArray[i]);
-//	}
-
-	// free the host memory
-	//free(h_array);
+    
+    free(seqArray)
+    free(h_array);
 
 	return 0;
 }
