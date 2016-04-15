@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<math.h>
+//#include<math.h>
 
 void usage(int exitStatus, char* programName);
 long long int sumArray(int* array, long long int arraySize);
@@ -57,7 +57,7 @@ int main(int argc, char** argv){
 	cudaMemset(d_array, 0, arraySizeInBytes);
 
 	// caculate the grid size
-	int gridSize = ceil((N + 1) / 2.0 / blockSize);
+	int gridSize = 100;//ceil((N + 1) / 2.0 / blockSize);
 
 	//int currentTime();
 	// run the kernel
@@ -95,6 +95,7 @@ void getSeqPrimes(int* array, long long int arraySize){
     		array[thisValue] = 1;
 	    	continue;
 	    }
+
 	    long long int j;
 	    for(j = 3; j*j < thisValue; j += 2){
 	        if(thisValue % j == 0){
