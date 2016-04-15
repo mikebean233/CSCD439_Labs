@@ -106,7 +106,7 @@ void getSeqPrimes(int* array, int arraySize){
 
 int sumArray(int* array, int arraySize){
 	int sum = 0;
-	long long index = 0;
+	int index = 0;
 	for(; index < arraySize; ++index){
 		sum += array[index];
 	}
