@@ -97,7 +97,7 @@ int main(int argc, char** argv){
 void getSeqPrimes(int* array, long long int arraySize){
 	
     long long int thisValue;
-    for(thisValue = 3; thisValue < arraySize; thisValue += 2){}
+    for(thisValue = 3; thisValue < arraySize; thisValue += 2){
 
 	  
 	    long long int j;
