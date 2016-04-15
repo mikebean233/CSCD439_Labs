@@ -4,6 +4,7 @@
 void usage(int exitStatus, char* programName);
 long long int sumArray(int* array, long long int arraySize);
 void getSeqPrimes(int* array, long long int arraySize);
+__device__ int  isPrime2(long long int value);
 
 __global__ void isPrime(int* d_array, long long int N){
     long long int threadId = blockIdx.x * blockDim.x + threadIdx.x;
