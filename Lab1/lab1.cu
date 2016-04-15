@@ -48,9 +48,9 @@ int main(int argc, char** argv){
 	// allocate our arrays
 	int* h_array;
 	int* d_array;
-	int* seqArray;
+	//int* seqArray;
 	h_array  = (int*) malloc(arraySizeInBytes);
-	seqArray = (int*) calloc(sizeof(int), N + 1);
+	//seqArray = (int*) calloc(sizeof(int), N + 1);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
