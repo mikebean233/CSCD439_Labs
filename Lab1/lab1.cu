@@ -2,7 +2,8 @@
 #include<math.h>
 
 void usage(int exitStatus, char* programName);
-long long int sumArray(int* array);
+long long int sumArray(int* array, long long int arraySize);
+void* getSeqPrimes(int* array, long long int arraySize);
 
 __global__ void isPrime(int* d_array, long long int N){
     long long int threadId = blockIdx.x * blockDim.x + threadIdx.x;
@@ -47,7 +48,9 @@ int main(int argc, char** argv){
 	// allocate our arrays
 	int* h_array;
 	int* d_array;
+	int* seqArray;
 	h_array = (int*) malloc(arraySizeInBytes);
+	seqArray = (int*) calloc(arraySizeInBytes);
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
@@ -56,7 +59,7 @@ int main(int argc, char** argv){
 	// caculate the grid size
 	int gridSize = ceil((N + 1) / 2.0 / blockSize);
 
-
+	int currentTime();
 	// run the kernel
 	isPrime<<<gridSize, blockSize>>>(d_array, N);
 
@@ -66,10 +69,23 @@ int main(int argc, char** argv){
 	// release the device array
 	cudaFree(d_array);
 
+	// run the sequential version
+	getSeqPrimes(seqArray, arraySizeInBytes);
+
+	int seqSum = sumArray(seqArray);
+	int parSum = sumArray(h_array);
+
+	printf("N: %lld\n", N);
+	printf("blockSize: %d\n", blockSize);
+	printf("gridSize: %d\n", gridSize);
+	printf("sequential prime count: %d\n", seqSum);
+	printf("paralell prim count: %d\n", parSum);
+
+
 	// Print our results
 	int i = 0;
 	for(; i < N; ++i){
-		printf("h_array[%d] = %lld\n", i, h_array[i]);
+		printf("h_array[%d] = %d\n", i, h_array[i]);
 	}
 
 	// free the host memory
@@ -78,6 +94,31 @@ int main(int argc, char** argv){
 	return 0;
 }
 
+void getSeqPrimes(int* array, long long int arraySize){
+	if(thisValue < 1)
+    	return;
+
+    if(thisValue == 2){
+        d_array[thisValue] = 1;
+        return;
+    }
+    if(arraySize < 3)
+    	return;
+
+    long long int thisValue;
+    for(thisValue = 3; thisValue < arraySize; thisValue += 2){}
+
+	  
+	    long long int j;
+	    for(j = 3; j*j < thisValue; j += 2){
+	        if(thisValue % j== 0){
+	            array[thisValue] = 0;
+	        }
+	    }
+
+	    array[thisValue] = 1;
+	}
+}
 
 long long int sumArray(int* array, long long int arraySize){
 	long long int sum = 0;
