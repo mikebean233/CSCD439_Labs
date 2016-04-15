@@ -37,7 +37,7 @@ int main(int argc, char** argv){
 	if(argc != 3)
 		usage(1, argv[0]);
 
-	int N = (long long int) atoi(argv[1]);
+	long long int N = (long long int) atoi(argv[1]);
 	int blockSize = atoi(argv[2]);
 
 	if(!(N | blockSize))
