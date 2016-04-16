@@ -6,7 +6,7 @@ void usage(int exitStatus, char* programName);
 int sumArray(int* array, int arraySize);
 void getSeqPrimes(int* array, int arraySize);
 
-__device__ int  isPrime(int value);
+__host__ __device__ int  isPrime(int value);
 
 __global__ void getPrimes(int* d_array, int N){
     int threadId = blockIdx.x * blockDim.x + threadIdx.x;
@@ -20,7 +20,7 @@ __global__ void getPrimes(int* d_array, int N){
 	}
 }
 
-__device__ __host__ int isPrime(int value){
+__host__ __device__ int isPrime(int value){
 
 	int limit = (int) sqrt( (float) value ) + 1;
 	int j;
@@ -61,7 +61,7 @@ int main(int argc, char** argv){
 	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
 
 	// run the kernel
-	isPrime<<<gridSize, blockSize>>>(d_array, N);
+	getPrimes<<<gridSize, blockSize>>>(d_array, N);
 
 	// copy the results back to the host array
 	cudaMemcpy(h_array, d_array, arraySizeInBytes, cudaMemcpyDeviceToHost);
