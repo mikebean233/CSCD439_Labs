@@ -55,9 +55,7 @@ int main(int argc, char** argv){
 	printf("h_array: %p\n", h_array);
 	printf("seqArray: %p\n", seqArray);
 
-	free(h_array);
-	free(seqArray);
-
+	// allocate device memory for the array
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
@@ -90,8 +88,8 @@ int main(int argc, char** argv){
 	printf("h_array: %p\n", h_array);
 	printf("seqArray: %p\n", seqArray);
 
-	free(seqArray);
 	free(h_array);
+	free(seqArray);
 
 	return 0;
 }

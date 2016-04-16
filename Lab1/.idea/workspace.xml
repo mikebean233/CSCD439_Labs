@@ -44,8 +44,8 @@
       <file leaf-file-name="lab1.cu" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lab1.cu">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="1275">
+              <caret line="85" column="48" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -520,8 +520,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lab1.cu">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="1275">
+          <caret line="85" column="48" selection-start-line="85" selection-start-column="48" selection-end-line="85" selection-end-column="48" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
