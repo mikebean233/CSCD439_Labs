@@ -6,8 +6,8 @@ void usage(int exitStatus, char* programName);
 int sumArray(int* array, int arraySize);
 void getSeqPrimes(int* array, int arraySize);
 
-__device__ int  isPrime(int value);
-
+/*__device__*/ int  isPrime(int value);
+/*
 __global__ void getPrimes(int* d_array, int N){
     int threadId = blockIdx.x * blockDim.x + threadIdx.x;
     int thisValue = (threadId * 2) + 1;
@@ -19,17 +19,17 @@ __global__ void getPrimes(int* d_array, int N){
 		d_array[thisValue] = isPrime2(thisValue);
 	}
 }
+*/
+/*__device__ __host__*/ int isPrime(int value){
 
-__device__ __host__ int isPrime(int value){
-
-	int limit = (int) sqrt( (float) value ) + 1;
-	int j;
-	for(j = 2; j < limit; j++){
-		if(value % j == 0){
-			return 0;
-		}
-	}
-	return 1;
+int limit = (int) sqrt( (float) value ) + 1;
+    int j;
+    for(j = 2; j < limit; j++){
+        if(value % j == 0){
+            return 0;
+        }
+    }
+    return 1;
 }
 
 
@@ -50,39 +50,39 @@ int main(int argc, char** argv){
 	int* d_array;
 
 	int* seqArray;
-	h_array  = (int*) malloc(arraySizeInBytes);
+	//h_array  = (int*) malloc(arraySizeInBytes);
 	seqArray = (int*) calloc(sizeof(int), N + 1);
-	cudaMalloc(&d_array, arraySizeInBytes);
+	//cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
-	cudaMemset(d_array, 0, arraySizeInBytes);
+	//cudaMemset(d_array, 0, arraySizeInBytes);
 
 	// caculate the grid size
-	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
+	//int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
 
 	// run the kernel
-	isPrime<<<gridSize, blockSize>>>(d_array, N);
+	//isPrime<<<gridSize, blockSize>>>(d_array, N);
 
 	// copy the results back to the host array
-	cudaMemcpy(h_array, d_array, arraySizeInBytes, cudaMemcpyDeviceToHost);
+	//cudaMemcpy(h_array, d_array, arraySizeInBytes, cudaMemcpyDeviceToHost);
 
 	// release the device array
-	cudaFree(d_array);
+	//cudaFree(d_array);
 
 	// run the sequential version
-	getSeqPrimes(seqArray, arraySizeInBytes);
+    getSeqPrimes(seqArray, arraySizeInBytes);
 
 	int seqSum = sumArray(seqArray, N + 1);
-	int parSum = sumArray(h_array, N + 1);
+	//int parSum = sumArray(h_array, N + 1);
 
 	printf("N: %d\n", N);
 	printf("blockSize: %d\n", blockSize);
-	printf("gridSize: %d\n", gridSize);
+//	printf("gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
-	printf("paralell prim count: %d\n", parSum);
-
-	free(seqArray);
-	free(h_array);
+//	printf("paralell prim count: %d\n", parSum);
+    
+    free(seqArray);
+   // free(h_array);
 
 	return 0;
 }
