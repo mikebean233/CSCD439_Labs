@@ -16,7 +16,7 @@ __global__ void getPrimes(int* d_array, int N){
     	return;
 
     if(thisValue < N){
-		d_array[thisValue] = isPrime2(thisValue);
+		d_array[thisValue] = isPrime(thisValue);
 	}
 }
 
@@ -52,6 +52,9 @@ int main(int argc, char** argv){
 	int* seqArray;
 	h_array  = (int*) malloc(arraySizeInBytes);
 	seqArray = (int*) calloc(sizeof(int), N + 1);
+	printf("h_array: %p\n", h_array);
+	printf("seqArray: %p\n", seqArray);
+
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
@@ -80,6 +83,9 @@ int main(int argc, char** argv){
 	printf("gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
 	printf("paralell prim count: %d\n", parSum);
+
+	printf("h_array: %p\n", h_array);
+	printf("seqArray: %p\n", seqArray);
 
 	free(seqArray);
 	free(h_array);
