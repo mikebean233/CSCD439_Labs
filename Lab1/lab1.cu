@@ -57,7 +57,7 @@ int main(int argc, char** argv){
 
 	free(h_array);
 	free(seqArray);
-	return 0;
+
 	cudaMalloc(&d_array, arraySizeInBytes);
 
 	// zero the memory in cuda
@@ -76,7 +76,7 @@ int main(int argc, char** argv){
 	cudaFree(d_array);
 
 	// run the sequential version
-	getSeqPrimes(seqArray, arraySizeInBytes);
+	getSeqPrimes(seqArray, N + 1);
 
 	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
