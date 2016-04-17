@@ -10,8 +10,10 @@ void getSeqPrimes(int* array, int arraySize);
 __host__ __device__ int  isPrime(int value);
 
 __global__ void getPrimes(int* d_array, int N){
-    int threadId = blockIdx.x * blockDim.x + threadIdx.x;
-    int thisValue = (threadId * 2) + 1;
+    int threadId = 0;
+	threadId = blockIdx.x * blockDim.x + threadIdx.x;
+    int thisValue = 0;
+	thisValue = (threadId * 2) + 1;
 
     if(threadId < 1)
     	return;
@@ -23,7 +25,8 @@ __global__ void getPrimes(int* d_array, int N){
 
 __host__ __device__ int isPrime(int value){
 
-	int limit = (int) sqrt( (float) value ) + 1;
+	int limit = 0;
+	limit = (int) sqrt( (float) value ) + 1;
 	int j;
 	for(j = 2; j < limit; j++){
 		if(value % j == 0){
@@ -38,29 +41,33 @@ int main(int argc, char** argv){
 	if(argc != 3)
 		usage(1, argv[0]);
 
-	int N = (int) atoi(argv[1]);
-	int blockSize = atoi(argv[2]);
+	int N = 0;
+	N = (int) atoi(argv[1]);
+	int blockSize = 0;
+	blockSize = atoi(argv[2]);
 
 	if(!(N | blockSize))
 		usage(2, argv[0]);
 
-	int arraySizeInBytes = sizeof(int) * (N + 1);
+	int arraySizeInBytes = 0;
+	arraySizeInBytes = sizeof(int) * (N + 1);
 
 	// index 0 : start time,  index 1: end time
-	struct timeval sequentialTimes[2];
-	struct timeval parallelTimes[2];
+	struct timeval sequentialTimes[2] = {{0,0},{0,0}};
+	struct timeval parallelTimes[2]   = {{0,0},{0,0}};
 
 
 	// allocate our arrays
-	int* h_array;
-	int* d_array;
+	int* h_array = NULL;
+	int* d_array = NULL;
 
 	int* seqArray;
 	h_array  = (int*) malloc(arraySizeInBytes);
 	seqArray = (int*) calloc(sizeof(int), N + 1);
 
 	// caculate the grid size
-	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
+	int gridSize = 0;
+	gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
 
 	// start parallel timer
 	gettimeofday( &(parallelTimes[0]), NULL);
@@ -93,12 +100,14 @@ int main(int argc, char** argv){
 	gettimeofday( &(sequentialTimes[1]), NULL);
 
 	// calculated time values
-	double parallelSeconds[2] = {
+	double parallelSeconds[2] = {0.0, 0.0};
+	parallelSeconds = {
 			parallelTimes[0].tv_sec + ((double)parallelTimes[0].tv_usec / 1000000),
 			parallelTimes[1].tv_sec + ((double)parallelTimes[1].tv_usec / 1000000),
 	};
 
-	double sequentialSeconds[2] = {
+	double sequentialSeconds[2] = {0.0, 0.0};
+	sequentialSeconds = {
 			sequentialTimes[0].tv_sec + ((double)sequentialTimes[0].tv_usec / 1000000),
 			sequentialTimes[1].tv_sec + ((double)sequentialTimes[1].tv_usec / 1000000),
 	};
@@ -132,7 +141,7 @@ int main(int argc, char** argv){
 }
 
 void getSeqPrimes(int* array, int arraySize){
-	int thisValue;
+	int thisValue = 0;
 	for(thisValue = 3; thisValue < arraySize; thisValue += 2){
 		array[thisValue] = isPrime(thisValue);
 	}
