@@ -50,7 +50,6 @@ int main(int argc, char** argv){
 		usage(2, argv[0]);
 
 	int arraySizeInBytes = 0;
-	arraySizeInBytes = 0;
 	arraySizeInBytes = sizeof(int) * (N + 1);
 
 	// index 0 : start time,  index 1: end time
@@ -119,7 +118,6 @@ int main(int argc, char** argv){
 
 	int seqSum = 0;
 	seqSum = sumArray(seqArray, N + 1);
-	
 	int parSum = 0;
 	parSum = sumArray(h_array, N + 1);
 
