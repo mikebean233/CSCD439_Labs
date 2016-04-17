@@ -101,16 +101,12 @@ int main(int argc, char** argv){
 
 	// calculated time values
 	double parallelSeconds[2] = {0.0, 0.0};
-	parallelSeconds = {
-			parallelTimes[0].tv_sec + ((double)parallelTimes[0].tv_usec / 1000000),
-			parallelTimes[1].tv_sec + ((double)parallelTimes[1].tv_usec / 1000000),
-	};
+	parallelSeconds[0] = parallelTimes[0].tv_sec + ((double)parallelTimes[0].tv_usec / 1000000);
+	parallelSeconds[1] = parallelTimes[1].tv_sec + ((double)parallelTimes[1].tv_usec / 1000000);
 
 	double sequentialSeconds[2] = {0.0, 0.0};
-	sequentialSeconds = {
-			sequentialTimes[0].tv_sec + ((double)sequentialTimes[0].tv_usec / 1000000),
-			sequentialTimes[1].tv_sec + ((double)sequentialTimes[1].tv_usec / 1000000),
-	};
+	sequentialSeconds[0] = sequentialTimes[0].tv_sec + ((double)sequentialTimes[0].tv_usec / 1000000);
+	sequentialSeconds[1] = sequentialTimes[1].tv_sec + ((double)sequentialTimes[1].tv_usec / 1000000);
 
 	double parallelCost   = 0;
 	parallelCost = parallelSeconds[1] - parallelSeconds[0];
