@@ -97,6 +97,9 @@ int main(int argc, char** argv){
 	unsigned long seqCostInMicroseconds = (unsigned long) (sequentialTimes[1].tv_usec) -(unsigned long) (sequentialTimes[0].tv_usec);
 	//double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
 
+	printf("parallel before: %ld  parallel after: %ld\n", parallelTimes[0].tv_usec, parallelTimes[1].tv_usec);
+	printf("sequential before: %ld  sequential after: %ld\n", sequentialTimes[0].tv_usec, sequentialTimes[1].tv_usec);
+
 
 	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
