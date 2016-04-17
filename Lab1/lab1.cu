@@ -105,7 +105,7 @@ int main(int argc, char** argv){
 
 	double parallelCost   = parallelSeconds[1] - parallelSeconds[0];
 	double sequentialCost = sequentialSeconds[1] - sequentialSeconds[0];
-	double speedup = parallelCost / squentialCost;
+	double speedup = parallelCost / sequentialCost;
 
 
 	int seqSum = sumArray(seqArray, N + 1);
