@@ -97,7 +97,7 @@ int main(int argc, char** argv){
 		// run the sequential version
 		getSeqPrimes(seqArray, N + 1);
 
-	// stop parallel timer
+	// stop sequential timer
 	gettimeofday( &(sequentialTimes[1]), NULL);
 
 	// calculated time values
@@ -127,7 +127,7 @@ int main(int argc, char** argv){
 	printf("             blockSize: %d\n",  blockSize);
 	printf("              gridSize: %d\n",  gridSize);
 	printf("sequential prime count: %d\n",  seqSum);
-        printf("  parallel prime count: %d\n",  parSum);        	
+	printf("  parallel prime count: %d\n",  parSum);
 	printf("    parallel time cost: %lf\n", parallelCost);
 	printf("  sequential time cost: %lf\n", sequentialCost);
 	printf("               speedup: %lf\n", speedup);
