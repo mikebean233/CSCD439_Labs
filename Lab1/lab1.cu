@@ -58,8 +58,6 @@ int main(int argc, char** argv){
 	int* seqArray;
 	h_array  = (int*) malloc(arraySizeInBytes);
 	seqArray = (int*) calloc(sizeof(int), N + 1);
-	printf("h_array: %p\n", h_array);
-	printf("seqArray: %p\n", seqArray);
 
 	// caculate the grid size
 	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
@@ -95,8 +93,8 @@ int main(int argc, char** argv){
 	gettimeofday( &(sequentialTimes[1]), NULL);
 
 	// calculated time values
-	int parCostInMicroseconds = (int) (parallelTimes[1].tv_usec) - (int) (parallelTimes[0].tv_usec);
-	int seqCostInMicroseconds = (int) (sequentialTimes[1].tv_usec) -(int) (sequentialTimes[0].tv_usec);
+	u_int32_t  parCostInMicroseconds = (u_int32_t) (parallelTimes[1].tv_usec) - (u_int32_t) (parallelTimes[0].tv_usec);
+	u_int32_t seqCostInMicroseconds = (u_int32_t) (sequentialTimes[1].tv_usec) -(u_int32_t) (sequentialTimes[0].tv_usec);
 	//double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
 
 
