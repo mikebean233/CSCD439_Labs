@@ -93,8 +93,8 @@ int main(int argc, char** argv){
 	gettimeofday( &(sequentialTimes[1]), NULL);
 
 	// calculated time values
-	u_int32_t  parCostInMicroseconds = (u_int32_t) (parallelTimes[1].tv_usec) - (u_int32_t) (parallelTimes[0].tv_usec);
-	u_int32_t seqCostInMicroseconds = (u_int32_t) (sequentialTimes[1].tv_usec) -(u_int32_t) (sequentialTimes[0].tv_usec);
+	unsigned long  parCostInMicroseconds = (unsigned long) (parallelTimes[1].tv_usec) - (unsigned long) (parallelTimes[0].tv_usec);
+	unsigned long seqCostInMicroseconds = (unsigned long) (sequentialTimes[1].tv_usec) -(unsigned long) (sequentialTimes[0].tv_usec);
 	//double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
 
 
@@ -106,8 +106,8 @@ int main(int argc, char** argv){
 	printf("              gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
 	printf("   parallel prim count: %d\n", parSum);
-	printf("    parallel time cost: %d\n", parCostInMicroseconds);
-	printf("  sequential time cost: %d\n", seqCostInMicroseconds);
+	printf("    parallel time cost: %lu\n", parCostInMicroseconds);
+	printf("  sequential time cost: %lu\n", seqCostInMicroseconds);
 	//printf("              speedup: %lf\n", speedup);
 
 	free(h_array);
