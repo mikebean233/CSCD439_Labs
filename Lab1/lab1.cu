@@ -108,8 +108,10 @@ int main(int argc, char** argv){
 	double speedup =  sequentialCost / parallelCost;
 
 
-	int seqSum = sumArray(seqArray, N + 1);
-	int parSum = sumArray(h_array, N + 1);
+	int seqSum = 0;
+	seqSum = sumArray(seqArray, N + 1);
+	int parSum = 0;
+	parSum = sumArray(h_array, N + 1);
 
 	printf("                     N: %d\n",  N);
 	printf("             blockSize: %d\n",  blockSize);
