@@ -47,8 +47,8 @@ int main(int argc, char** argv){
 	int arraySizeInBytes = sizeof(int) * (N + 1);
 
 	// index 0 : start time,  index 1: end time
-	timeval* sequentialTimes = timeval[2];
-	timeval* parallelTimes   = timeval[2];
+	struct timeval sequentialTimes[2];
+	struct timeval parallelTimes[2];
 
 
 	// allocate our arrays
@@ -65,7 +65,7 @@ int main(int argc, char** argv){
 	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
 
 	// start parallel timer
-	gettimeofday(parallelTimes, NULL);
+	gettimeofday( &(parallelTimes[0]), NULL);
 
 		// allocate device memory for the array
 		cudaMalloc(&d_array, arraySizeInBytes);
@@ -83,21 +83,21 @@ int main(int argc, char** argv){
 		cudaFree(d_array);
 
 	// stop parallel timer
-	gettimeofday(paralleltTimes + 1, NULL);
+	gettimeofday( &(parallelTimes[1])  , NULL);
 
 	// start sequential timer
-	gettimeofday(sequentialTimes, NULL);
+	gettimeofday( &(sequentialTimes[0]), NULL);
 
 		// run the sequential version
 		getSeqPrimes(seqArray, N + 1);
 
 	// stop parallel timer
-	gettimeofday(sequentialTimes + 1, NULL);
+	gettimeofday( &(sequentialTimes[1]), NULL);
 
 	// calculated time values
-	double parallelElapsedSeconds   =   parallelTimes[1].tv_usec - parallelElapsedSeconds[0].tv_usec;
-	double sequentialElapsedSeconds = sequentialTimes[1].tv_usec -        sequentialTimes[0].tv_usec;
-	double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
+	int parCostInMicroseconds = (int) (parallelTimes[1].tv_usec) - (int) (parallelTimes[0].tv_usec);
+	int seqCostInMicroseconds = (int) (sequentialTimes[1].tv_usec) -(int) (sequentialTimes[0].tv_usec);
+	//double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
 
 
 	int seqSum = sumArray(seqArray, N + 1);
@@ -108,12 +108,9 @@ int main(int argc, char** argv){
 	printf("              gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
 	printf("   parallel prim count: %d\n", parSum);
-	printf("    parallel time cost: %lf\n", parallelElapsedSeconds);
-	printf("  sequential time cost: %lf\n", sequentialElapsedSeconds);
-	printf("               speedup: %lf\n", speedup);
-
-	printf("h_array: %p\n", h_array);
-	printf("seqArray: %p\n", seqArray);
+	printf("    parallel time cost: %d\n", parCostInMicroseconds);
+	printf("  sequential time cost: %d\n", seqCostInMicroseconds);
+	//printf("              speedup: %lf\n", speedup);
 
 	free(h_array);
 	free(seqArray);
