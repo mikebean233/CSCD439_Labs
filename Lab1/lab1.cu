@@ -103,9 +103,12 @@ int main(int argc, char** argv){
 			sequentialTimes[1].tv_sec + ((double)sequentialTimes[1].tv_usec / 1000000),
 	};
 
-	double parallelCost   = parallelSeconds[1] - parallelSeconds[0];
-	double sequentialCost = sequentialSeconds[1] - sequentialSeconds[0];
-	double speedup =  sequentialCost / parallelCost;
+	double parallelCost   = 0;
+	parallelCost = parallelSeconds[1] - parallelSeconds[0];
+	double sequentialCost = 0;
+	sequentialCost = sequentialSeconds[1] - sequentialSeconds[0];
+	double speedup = 0;
+	speedup = sequentialCost / parallelCost;
 
 
 	int seqSum = 0;
