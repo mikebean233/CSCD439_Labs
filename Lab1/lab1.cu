@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<math.h>
 #include<stdlib.h>
+#include<sys/time.h>
 
 void usage(int exitStatus, char* programName);
 int sumArray(int* array, int arraySize);
@@ -45,6 +46,11 @@ int main(int argc, char** argv){
 
 	int arraySizeInBytes = sizeof(int) * (N + 1);
 
+	// index 0 : start time,  index 1: end time
+	timeval* sequentialTimes = timeval[2];
+	timeval* parallelTimes   = timeval[2];
+
+
 	// allocate our arrays
 	int* h_array;
 	int* d_array;
@@ -55,35 +61,56 @@ int main(int argc, char** argv){
 	printf("h_array: %p\n", h_array);
 	printf("seqArray: %p\n", seqArray);
 
-	// allocate device memory for the array
-	cudaMalloc(&d_array, arraySizeInBytes);
-
-	// zero the memory in cuda
-	cudaMemset(d_array, 0, arraySizeInBytes);
-
 	// caculate the grid size
 	int gridSize = (int)ceil((N + 1) / 2.0 / blockSize);
 
-	// run the kernel
-	getPrimes<<<gridSize, blockSize>>>(d_array, N);
+	// start parallel timer
+	gettimeofday(parallelTimes, NULL);
 
-	// copy the results back to the host array
-	cudaMemcpy(h_array, d_array, arraySizeInBytes, cudaMemcpyDeviceToHost);
+		// allocate device memory for the array
+		cudaMalloc(&d_array, arraySizeInBytes);
 
-	// release the device array
-	cudaFree(d_array);
+		// zero the memory in cuda
+		cudaMemset(d_array, 0, arraySizeInBytes);
 
-	// run the sequential version
-	getSeqPrimes(seqArray, N + 1);
+		// run the kernel
+		getPrimes<<<gridSize, blockSize>>>(d_array, N);
+
+		// copy the results back to the host array
+		cudaMemcpy(h_array, d_array, arraySizeInBytes, cudaMemcpyDeviceToHost);
+
+		// release the device array
+		cudaFree(d_array);
+
+	// stop parallel timer
+	gettimeofday(paralleltTimes + 1, NULL);
+
+	// start sequential timer
+	gettimeofday(sequentialTimes, NULL);
+
+		// run the sequential version
+		getSeqPrimes(seqArray, N + 1);
+
+	// stop parallel timer
+	gettimeofday(sequentialTimes + 1, NULL);
+
+	// calculated time values
+	double parallelElapsedSeconds   =   parallelTimes[1].tv_usec - parallelElapsedSeconds[0].tv_usec;
+	double sequentialElapsedSeconds = sequentialTimes[1].tv_usec -        sequentialTimes[0].tv_usec;
+	double speedup = parallelElapsedSeconds / sequentialElapsedSeconds;
+
 
 	int seqSum = sumArray(seqArray, N + 1);
 	int parSum = sumArray(h_array, N + 1);
 
-	printf("N: %d\n", N);
-	printf("blockSize: %d\n", blockSize);
-	printf("gridSize: %d\n", gridSize);
+	printf("                     N: %d\n", N);
+	printf("             blockSize: %d\n", blockSize);
+	printf("              gridSize: %d\n", gridSize);
 	printf("sequential prime count: %d\n", seqSum);
-	printf("paralell prim count: %d\n", parSum);
+	printf("   parallel prim count: %d\n", parSum);
+	printf("    parallel time cost: %lf\n", parallelElapsedSeconds);
+	printf("  sequential time cost: %lf\n", sequentialElapsedSeconds);
+	printf("               speedup: %lf\n", speedup);
 
 	printf("h_array: %p\n", h_array);
 	printf("seqArray: %p\n", seqArray);
@@ -95,9 +122,6 @@ int main(int argc, char** argv){
 }
 
 void getSeqPrimes(int* array, int arraySize){
-	if(arraySize >= 3)
-		array[2] = 1;
-
 	int thisValue;
 	for(thisValue = 3; thisValue < arraySize; thisValue += 2){
 		array[thisValue] = isPrime(thisValue);
