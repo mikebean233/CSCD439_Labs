@@ -9,7 +9,7 @@ __global__ void diffKernel( float *in, float *out, int n )
 {
     int threadId = blockIdx.x * blockDim.x + threadIdx.x;
     // Write the kernel to implement the diff operation on an array
-    out[threadId] = in[threadId] + in[threadId + 1];
+    out[threadId] = in[threadId + 1] - in[threadId];
 }  
  
 int main( int argc, char* argv[] )
