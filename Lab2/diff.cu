@@ -46,7 +46,7 @@ int main( int argc, char* argv[] )
     // Number of thread blocks in grid
     int gridsize = 1;
     // Execute the kernel
-    diffKernel<<<gridsize, blocksize>>>(d_in, d_out, N);
+    diffKernel<<<gridsize, blocksize>>>(d_in, d_out, n);
  
     // Copy array back to host
     cudaMemcpy( h_out, d_out, bytes - sizeof(float), cudaMemcpyDeviceToHost );
