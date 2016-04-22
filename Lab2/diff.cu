@@ -9,12 +9,14 @@ __global__ void diffKernel( float *in, float *out, int n )
 {
     int threadId = blockIdx.x * blockDim.x + threadIdx.x;
     // Write the kernel to implement the diff operation on an array
-    if(threadId < n)
+    if(threadId < n - 1)
         out[threadId] = in[threadId + 1] - in[threadId];
 }  
  
 int main( int argc, char* argv[] )
 {
+    cudaDeviceReset();
+    
     // Size of vectors
     int i;
     float input[] = {4, 5, 6, 7, 19, 10, 0, 4, 2, 3, 1, 7, 9, 11, 45, 23, 99, 29};
