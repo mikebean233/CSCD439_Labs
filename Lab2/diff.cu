@@ -9,7 +9,8 @@ __global__ void diffKernel( float *in, float *out, int n )
 {
     int threadId = blockIdx.x * blockDim.x + threadIdx.x;
     // Write the kernel to implement the diff operation on an array
-    out[threadId] = in[threadId + 1] - in[threadId];
+    if(threadId < n)
+        out[threadId] = in[threadId + 1] - in[threadId];
 }  
  
 int main( int argc, char* argv[] )
@@ -40,11 +41,11 @@ int main( int argc, char* argv[] )
     cudaMemcpy( d_in, h_in, bytes, cudaMemcpyHostToDevice);
 
     // TODO: setup the blocksize and gridsize and launch the kernel below.
-    int blocksize = n;
+    int blocksize = BLOCKSIZE;
     // Number of threads in each thread block
 
     // Number of thread blocks in grid
-    int gridsize = 1;
+    int ceil(n / blocksize);
     // Execute the kernel
     diffKernel<<<gridsize, blocksize>>>(d_in, d_out, n);
  
