@@ -45,7 +45,8 @@ int main( int argc, char* argv[] )
     // Number of threads in each thread block
 
     // Number of thread blocks in grid
-    int ceil(n / blocksize);
+    int gridsize = (int) ceil((double)n / (double)blocksize);
+
     // Execute the kernel
     diffKernel<<<gridsize, blocksize>>>(d_in, d_out, n);
  
