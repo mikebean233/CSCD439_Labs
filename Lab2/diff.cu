@@ -16,7 +16,7 @@ __global__ void diffKernel( float *in, float *out, int n )
 int main( int argc, char* argv[] )
 {
     cudaDeviceReset();
-    
+
     // Size of vectors
     int i;
     float input[] = {4, 5, 6, 7, 19, 10, 0, 4, 2, 3, 1, 7, 9, 11, 45, 23, 99, 29};
