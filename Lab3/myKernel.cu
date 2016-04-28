@@ -21,7 +21,7 @@ __global__ void kernel2( int *a, int dimx, int dimy )
         return;
 
     int outIndex = row * dimx + col;
-    a[outIndex] = blockIdx.y * blockDim.x + blockIdx.x;
+    a[outIndex] = blockIdx.y * gridDim.x + blockIdx.x;
 }
 
 __global__ void kernel3( int *a, int dimx, int dimy )
@@ -73,7 +73,7 @@ __global__ void kernel6( int *a, int dimx, int dimy )
         return;
 
     int outIndex = row * dimx + col;
-    a[outIndex] = col;
+    a[outIndex] = blockIdx.x;
 }
 
 
