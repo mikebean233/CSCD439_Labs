@@ -20,7 +20,7 @@ __global__ void diffKernel( float *in, float *out, int n )
     s_data[threadIdx.x] = in[global_index];
 
     if(threadIdx.x == blockDim.x - 1)
-        s_data[threadIdx.x] = in[global_index];
+        s_data[threadIdx.x] = in[global_index + 1];
 
     // Wait for all of the threads to reach the barrier
     __syncthreads();
@@ -60,7 +60,7 @@ int main( int argc, char* argv[] )
     // Number of threads in each thread block
      int blocksize = 5;
     // Number of thread blocks in grid
-    int gridsize = ceil((float) n / blocksize);
+    int gridsize = ceil((float) (n - 1) / blocksize);
     // Execute the kernel
     diffKernel<<<blocksize, gridsize, blocksize + 1>>>(d_in, d_out, n); 
  
