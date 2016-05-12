@@ -39,7 +39,7 @@ int main( int argc, char* argv[] )
     // Host input vectors
     float *h_in = input;
     //Host output vector
-    float *h_out = (float *) malloc(n * sizeof(float));
+    float *h_out = (float *) malloc((n - 1) * sizeof(float));
  
     // Device input vectors
     float *d_in;;
@@ -72,8 +72,8 @@ int main( int argc, char* argv[] )
     for(i = 0; i < n; i ++)
         printf("%4.0f,", h_in[i] );    
     
-    printf("\n\nThe diff     array is: ");
-    for(i = 0; i < n; i++)
+    printf("\n\nThe diff     array is:     ");
+    for(i = 0; i < n - 1; i++)
         printf("%4.0f,", h_out[i] );    
     puts("");
     
