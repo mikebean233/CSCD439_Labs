@@ -20,7 +20,7 @@ __global__ void diffKernel( float *in, float *out, int n )
     s_data[threadIdx.x] = in[global_index];
 
     if(threadIdx.x == blockDim.x - 1)
-        s_data[threadIdx.x] in[global_index];
+        s_data[threadIdx.x] = in[global_index];
 
     // Wait for all of the threads to reach the barrier
     __syncthreads();
@@ -62,7 +62,7 @@ int main( int argc, char* argv[] )
     // Number of thread blocks in grid
     int gridsize = ceil((float) n / blocksize);
     // Execute the kernel
-    <<<blocksize, gridsize, blocksize + 1>>> diffKernel(d_in, d_out, n); 
+    diffKernel<<<blocksize, gridsize, blocksize + 1>>>(d_in, d_out, n); 
  
     // Copy array back to host
     cudaMemcpy( h_out, d_out, bytes, cudaMemcpyDeviceToHost );
