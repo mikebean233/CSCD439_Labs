@@ -13,13 +13,13 @@ __global__ void diffKernel( float *in, float *out, int n )
     unsigned int global_index = blockDim.x * blockIdx.x + threadIdx.x;
 
     // Make sure this thread is within bounds
-    if(global_index >= n - 2)
+    if(global_index > n - 2)
         return;
     
     // Copy global data to shared memory
     s_data[threadIdx.x] = in[global_index];
 
-    if(threadIdx.x == blockDim.x - 1)
+    if(threadIdx.x == blockDim.x - 1 || global_index == n - 2)
         s_data[threadIdx.x + 1] = in[global_index + 1];
 
     // Wait for all of the threads to reach the barrier
@@ -72,7 +72,7 @@ int main( int argc, char* argv[] )
     for(i = 0; i < n; i ++)
         printf("%4.0f,", h_in[i] );    
     
-    printf("\n\nThe diff     array is:     ");
+    printf("\n\nThe diff     array is:      ");
     for(i = 0; i < n - 1; i++)
         printf("%4.0f,", h_out[i] );    
     puts("");
