@@ -49,8 +49,8 @@ __global__ void wordCount( char **a, int **out, int numLine, int maxLineLen )
     if(col > maxLineLen - 1 || row > numLine - 1)
         return;
     
-    int neighboringDelim = (col != 0 && gpu_isAlpha(a[row][col-1]));
-    out[row][col] = (gpu_isAlpha(a[row][col]) && neighboringDelim);
+    int neighboringDelim = (col != 0 && !gpu_isAlpha(a[row][col-1]));
+    out[row][col] = (!gpu_isAlpha(a[row][col]) && neighboringDelim);
 }  
 
 /* Print out the all lines of text in a on stdout
