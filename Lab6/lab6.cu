@@ -46,10 +46,10 @@ __global__ void wordCount( char **a, int **out, int numLine, int maxLineLen )
     unsigned int row = blockDim.y * blockIdx.y + threadIdx.y;
     unsigned int col = blockDim.x * blockIdx.x + threadIdx.x;
 
-    if(col > maxLineLen - 1 || row > numLine - 1)
+    if(col > maxLineLen - 1 || row > numLine - 1 || col == 0)
         return;
     
-    int neighboringDelim = (col != 0 && !gpu_isAlpha(a[row][col-1]));
+    int neighboringDelim = !(col != 0 && !gpu_isAlpha(a[row][col-1]));
     out[row][col] = (!gpu_isAlpha(a[row][col]) && neighboringDelim);
 }  
 
