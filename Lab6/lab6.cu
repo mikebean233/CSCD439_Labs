@@ -28,6 +28,7 @@ __device__ int gpu_isAlpha(char ch)
     char* upperCase = "abcdefghijklmnopqrstuvwxyz";
     char* lowerCase = "ABCDEFGHIJKLMNOPQRSTUVWXUZ";
     int i = 0;
+    
     for(i = 0; i < 26; ++i){
         if(upperCase[i] == ch || lowerCase[i] == ch)
             return 0;
@@ -48,7 +49,9 @@ __global__ void wordCount( char **a, int **out, int numLine, int maxLineLen )
     if(col > maxLineLen - 1 || row > numLine - 1)
         return;
 
-    out[row][col] = (int)a[row][col];
+    unsigned int outIndex = row * dimx + col;
+
+    out[outIndex] = (int)a[outIndex];
 }  
 
 /* Print out the all lines of text in a on stdout
