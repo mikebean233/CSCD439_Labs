@@ -43,15 +43,14 @@ __device__ int gpu_isAlpha(char ch)
  */
 __global__ void wordCount( char **a, int **out, int numLine, int maxLineLen )
 {
-    unsigned int row = blockDim.x * blockIdx.x + threadIdx.x;
-    unsigned int col = blockDim.y * blockIdx.y + threadIdx.y;
+    unsigned int row = blockDim.y * blockIdx.y + threadIdx.y;
+    unsigned int col = blockDim.x * blockIdx.x + threadIdx.x;
 
     if(col > maxLineLen - 1 || row > numLine - 1)
         return;
-
-    unsigned int outIndex = row * dimx + col;
-
-    out[outIndex] = (int)a[outIndex];
+    
+    int neighboringDelim = (col != 0 && gpu_isAlpha(a[row][col-1]));
+    out[row][col] = (gpu_isAlpha(a[row][col]) && neighboringDelim);
 }  
 
 /* Print out the all lines of text in a on stdout
